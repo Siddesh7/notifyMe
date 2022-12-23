@@ -1,7 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cron = require("node-cron");
+const priceHandler = require("./cronHandler");
 
-require("dotenv").config();
 const app = express();
 
 const mongoString = process.env.MONGO_URL;
@@ -21,3 +23,7 @@ app.listen(3000, () => {
   console.log(`Server Started at ${3000}`);
 });
 app.use("/api", routes);
+
+cron.schedule("* * * * *", async () => {
+  priceHandler.getPriceAlerts();
+});
