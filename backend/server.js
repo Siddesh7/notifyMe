@@ -25,5 +25,5 @@ app.listen(3000, () => {
 app.use("/api", routes);
 
 cron.schedule("* * * * *", async () => {
-  priceHandler.getPriceAlerts();
+  priceHandler.getGasAlerts();
 });

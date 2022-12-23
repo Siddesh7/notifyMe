@@ -27,7 +27,16 @@ router.post("/gas", async (req, res) => {
     res.send(error);
   }
 });
-
+router.delete("/gas", (req, res) => {
+  gasAlerts.findByIdAndRemove(req.body.id, (err, item) => {
+    if (err) return res.status(500).send(err);
+    const response = {
+      message: "Item successfully deleted",
+      id: item._id,
+    };
+    return res.status(200).send(response);
+  });
+});
 router.delete("/price", (req, res) => {
   priceAlerts.findByIdAndRemove(req.body.id, (err, item) => {
     if (err) return res.status(500).send(err);
