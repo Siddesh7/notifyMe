@@ -1,12 +1,21 @@
-import React from "react";
+import { WagmiConfig, createClient } from "wagmi";
+import { ConnectKitProvider, getDefaultClient } from "connectkit";
 import LandingPage from "./LandingPage";
 
-function App() {
+const client = createClient(
+  getDefaultClient({
+    appName: "Your App Name",
+  })
+);
+
+const App = () => {
   return (
-    <div>
-      <LandingPage />
-    </div>
+    <WagmiConfig client={client}>
+      <ConnectKitProvider>
+        <LandingPage />
+      </ConnectKitProvider>
+    </WagmiConfig>
   );
-}
+};
 
 export default App;
