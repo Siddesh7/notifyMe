@@ -3,6 +3,7 @@ const PriceAlerts = require("../model/priceAlerts");
 const gasAlerts = require("../model/gasAlerts");
 const priceAlerts = require("../model/priceAlerts");
 const nftAlerts = require("../model/nftAlerts");
+const trackAddress = require("../model/trackAddress");
 const utilities = require("../utilities/createWebhook");
 const router = express.Router();
 const Push = require("../sendNotifications");
@@ -36,6 +37,18 @@ router.post("/nft", async (req, res) => {
     await alert.save();
     console.log(req.body.contract_address, req.body.token_id);
     utilities.updateWebhook(req.body.contract_address, req.body.token_id);
+    res.send(alert);
+  } catch (error) {
+    res.send(error);
+  }
+});
+router.post("/address", async (req, res) => {
+  // Create a new alert
+  const alert = new trackAddress(req.body);
+  console.log(req.body);
+  try {
+    await alert.save();
+    utilities.addAddressToBeTracked(req.body.address, req.body.chain);
     res.send(alert);
   } catch (error) {
     res.send(error);
@@ -88,10 +101,10 @@ router.get("/nft", async (req, res) => {
     res.send(error);
   }
 });
-router.get("/nft", async (req, res) => {
+router.get("/address", async (req, res) => {
   // Get all alerts
   try {
-    const alerts = await nftAlerts.find();
+    const alerts = await trackAddress.find();
     res.send(alerts);
   } catch (error) {
     res.send(error);
@@ -99,11 +112,9 @@ router.get("/nft", async (req, res) => {
 });
 
 router.post("/webhook", async (req, res) => {
-  const title = `The NFT (${req.body.event.activity.to}) was transferred !!`;
+  const title = `The NFT (${req.body.event.activity[0].toAddress}) was transferred !!`;
   const tokenID = req.body.event.activity[0].erc721TokenId;
-  const body = `${req.body.event.activity[0].contractAddress}:${
-    req.body.event.activity.erc721TokenId
-  } was transferred to ${tokenID.substring(2)}`;
+  const body = `The NFT was tranferred, watch the transaction at https://goerli.etherscan.io/tx/${req.body.event.activity[0].hash}`;
 
   console.log(tokenID);
   try {
@@ -112,9 +123,17 @@ router.post("/webhook", async (req, res) => {
       token_id: tokenID.substring(2),
     });
 
-    // Push.sendNotification(title,body,)
+    Push.sendNotification(title, body, alert.requester);
 
     res.send({ alert: alert });
+  } catch (error) {
+    res.send(error);
+  }
+});
+router.post("/addresswebhook", async (req, res) => {
+  console.log(req.body.event.activity[0]);
+  try {
+    res.send(req.body.event.activity[0]);
   } catch (error) {
     res.send(error);
   }

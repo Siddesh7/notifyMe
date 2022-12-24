@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useAccount } from "wagmi";
-function PriceRangeForm() {
+function NftTracker() {
   const { address } = useAccount();
   const [formData, setFormData] = useState({
     requester: address,
-    minPrice: "",
-    maxPrice: "",
+    contract_address: "",
+    token_id: "",
   });
 
-  const url = "http://localhost:3000/api/price";
+  const url = "http://localhost:3000/api/nft";
   const handleSubmit = (event) => {
     event.preventDefault();
+
     fetch(url, {
       method: "POST",
       headers: {
@@ -26,43 +27,45 @@ function PriceRangeForm() {
   return (
     <div className="bg-gray-900 rounded-lg shadow-lg p-6 w-full md:w-[40%]">
       <div className="text-gray-200 font-bold text-4xl mb-2">
-        Price Alerter ($ETH only)
+        NFT tracker (transfers){" "}
+        <p className="text-[24px] text-gray-600">(Ethereum Mainnet)</p>
       </div>
       <form>
-        <div className="mb-4">
+        <div className="mb-8">
           <label
             className="block font-medium mb-2 text-white"
             htmlFor="minPrice"
           >
-            Minimum Price
+            Contract Address
+          </label>
+          <input
+            className="form-input py-2 px-3 block w-full leading-tight rounded-md focus:outline-none focus:shadow-outline-blue-500"
+            id="minPrice"
+            type="text"
+            value={formData.contract_address}
+            onChange={(e) => {
+              setFormData({ ...formData, contract_address: e.target.value });
+            }}
+          />
+        </div>
+        <div className="mb-8">
+          <label
+            className="block font-medium mb-2 text-white"
+            htmlFor="minPrice"
+          >
+            Token ID
           </label>
           <input
             className="form-input py-2 px-3 block w-full leading-tight rounded-md focus:outline-none focus:shadow-outline-blue-500"
             id="minPrice"
             type="number"
-            value={formData.minPrice}
+            value={formData.token_id}
             onChange={(e) => {
-              setFormData({ ...formData, minPrice: e.target.value });
+              setFormData({ ...formData, token_id: e.target.value });
             }}
           />
         </div>
-        <div className="mb-10">
-          <label
-            className="block font-medium mb-2 text-white"
-            htmlFor="maxPrice"
-          >
-            Maximum Price
-          </label>
-          <input
-            className="form-input py-2 px-3 block w-full leading-tight rounded-md focus:outline-none focus:shadow-outline-blue-500"
-            id="maxPrice"
-            type="number"
-            value={formData.maxPrice}
-            onChange={(e) => {
-              setFormData({ ...formData, maxPrice: e.target.value });
-            }}
-          />
-        </div>
+
         <div className="text-center mb-[20px]">
           {address ? (
             <a
@@ -83,4 +86,4 @@ function PriceRangeForm() {
   );
 }
 
-export default PriceRangeForm;
+export default NftTracker;
