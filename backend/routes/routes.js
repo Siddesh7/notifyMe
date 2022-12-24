@@ -2,9 +2,10 @@ const express = require("express");
 const PriceAlerts = require("../model/priceAlerts");
 const gasAlerts = require("../model/gasAlerts");
 const priceAlerts = require("../model/priceAlerts");
-
+const nftAlerts = require("../model/nftAlerts");
+const utilities = require("../utilities/createWebhook");
 const router = express.Router();
-
+const Push = require("../sendNotifications");
 router.post("/price", async (req, res) => {
   // Create a new alert
   const alert = new PriceAlerts(req.body);
@@ -22,6 +23,19 @@ router.post("/gas", async (req, res) => {
   console.log(req.body);
   try {
     await alert.save();
+    res.send(alert);
+  } catch (error) {
+    res.send(error);
+  }
+});
+router.post("/nft", async (req, res) => {
+  // Create a new alert
+  const alert = new nftAlerts(req.body);
+  console.log(req.body);
+  try {
+    await alert.save();
+    console.log(req.body.contract_address, req.body.token_id);
+    utilities.updateWebhook(req.body.contract_address, req.body.token_id);
     res.send(alert);
   } catch (error) {
     res.send(error);
@@ -65,5 +79,44 @@ router.get("/gas", async (req, res) => {
     res.send(error);
   }
 });
+router.get("/nft", async (req, res) => {
+  // Get all alerts
+  try {
+    const alerts = await nftAlerts.find();
+    res.send(alerts);
+  } catch (error) {
+    res.send(error);
+  }
+});
+router.get("/nft", async (req, res) => {
+  // Get all alerts
+  try {
+    const alerts = await nftAlerts.find();
+    res.send(alerts);
+  } catch (error) {
+    res.send(error);
+  }
+});
 
+router.post("/webhook", async (req, res) => {
+  const title = `The NFT (${req.body.event.activity.to}) was transferred !!`;
+  const tokenID = req.body.event.activity[0].erc721TokenId;
+  const body = `${req.body.event.activity[0].contractAddress}:${
+    req.body.event.activity.erc721TokenId
+  } was transferred to ${tokenID.substring(2)}`;
+
+  console.log(tokenID);
+  try {
+    const alert = await nftAlerts.findOne({
+      contract_address: req.body.event.activity[0].contractAddress,
+      token_id: tokenID.substring(2),
+    });
+
+    // Push.sendNotification(title,body,)
+
+    res.send({ alert: alert });
+  } catch (error) {
+    res.send(error);
+  }
+});
 module.exports = router;

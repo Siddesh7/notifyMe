@@ -67,7 +67,7 @@ async function getGasAlerts() {
           })
           .then((response) => {
             const gasPriceInWei = response.data.result;
-            const gasPriceInGwei = gasPriceInWei / 1000000000;
+            const gasPriceInGwei = Math.floor(gasPriceInWei / 1000000000);
 
             alerts.forEach((entry) => {
               console.log(entry.gasPrice, gasPriceInGwei);

@@ -19,9 +19,11 @@ database.on("error", (error) => {
 database.once("connected", () => {
   console.log("Database Connected");
 });
+
 app.listen(3000, () => {
   console.log(`Server Started at ${3000}`);
 });
+
 app.use("/api", routes);
 
 cron.schedule("* * * * *", async () => {
