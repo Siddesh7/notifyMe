@@ -4,7 +4,7 @@ const trackAddress = new mongoose.Schema({
   requester: {
     type: String,
   },
-  address: {
+  addressTracked: {
     type: String,
   },
   chain: {

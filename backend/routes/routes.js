@@ -48,7 +48,7 @@ router.post("/address", async (req, res) => {
   console.log(req.body);
   try {
     await alert.save();
-    utilities.addAddressToBeTracked(req.body.address, req.body.chain);
+    utilities.addAddressToBeTracked(req.body.addressTracked, req.body.chain);
     res.send(alert);
   } catch (error) {
     res.send(error);
@@ -131,9 +131,21 @@ router.post("/webhook", async (req, res) => {
   }
 });
 router.post("/addresswebhook", async (req, res) => {
-  console.log(req.body.event.activity[0]);
+  const fromAddress = req.body.event.activity[0].fromAddress;
+  const toAddress = req.body.event.activity[0].toAddress;
+  const hash = req.body.event.activity[0].hash;
+  const query = {
+    $or: [{ addressTracked: fromAddress }, { addressTracked: toAddress }],
+  };
   try {
-    res.send(req.body.event.activity[0]);
+    const alert = await trackAddress.findOne(query);
+    Push.sendNotification(
+      "New Transaction detected",
+      `${alert.addressTracked} made a new transaction, check it at https://goerli.etherscan.io/tx/${hash}`,
+      alert.requester
+    );
+    console.log(alert.requester);
+    res.send(alert);
   } catch (error) {
     res.send(error);
   }
