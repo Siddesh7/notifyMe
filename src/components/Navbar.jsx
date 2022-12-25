@@ -8,7 +8,7 @@ function Navbar() {
         <div className="text-white font-bold text-2xl">NotifyMe</div>
         <div className="flex space-x-4">
           <a
-            href="/ap"
+            href="/price"
             className="text-gray-300 hover:text-white font-bold py-2 px-4 rounded-full"
           >
             Get Started

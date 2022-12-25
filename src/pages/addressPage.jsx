@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import NftTracker from "../components/nftForm";
 import Tracked from "../components/NftTracked";
 import ActivityTracker from "../components/addressForm";
 export default function AddressPage() {
@@ -8,7 +7,9 @@ export default function AddressPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("http://localhost:3000/api/address");
+      const response = await axios.get(
+        "https://push-notify-me.onrender.com/api/address"
+      );
       setData(response.data);
       console.log(response.data);
     }

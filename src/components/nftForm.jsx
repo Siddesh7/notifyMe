@@ -8,7 +8,7 @@ function NftTracker() {
     token_id: "",
   });
 
-  const url = "http://localhost:3000/api/nft";
+  const url = "https://push-notify-me.onrender.com/api/nft";
   const handleSubmit = (event) => {
     event.preventDefault();
 

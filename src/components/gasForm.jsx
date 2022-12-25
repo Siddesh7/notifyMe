@@ -7,7 +7,7 @@ function GasRangeForm() {
     gasPrice: "",
   });
 
-  const url = "http://localhost:3000/api/gas";
+  const url = "https://push-notify-me.onrender.com/api/gas";
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch(url, {

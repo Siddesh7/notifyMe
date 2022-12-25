@@ -8,7 +8,7 @@ function PriceRangeForm() {
     maxPrice: "",
   });
 
-  const url = "http://localhost:3000/api/price";
+  const url = "https://push-notify-me.onrender.com/api/price";
   const handleSubmit = (event) => {
     event.preventDefault();
     fetch(url, {
