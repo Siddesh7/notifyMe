@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import AnimateText from "./components/animatedText";
+
 export default function LandingPage() {
   return (
     <div className="h-[100vh] md:overflow-y-hidden">
@@ -16,9 +18,11 @@ export default function LandingPage() {
           >
             Less go
           </a>
-
           <div className="flex flex-col md:flex-row space-y-8 space-x-0 md:space-y-0 md:space-x-4 mt-[20px]">
-            <div className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]">
+            <Link
+              to="/gas"
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]"
+            >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 Set Gas Price Alerts
               </div>
@@ -28,8 +32,11 @@ export default function LandingPage() {
                 Stay ahead of the game with alerts for when gas prices reach
                 your target level!
               </p>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]">
+            </Link>
+            <Link
+              to="/price"
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]"
+            >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 Set ETH Price Alerts
               </div>
@@ -37,8 +44,11 @@ export default function LandingPage() {
                 Don't miss out on the next Ethereum price surge - set alerts and
                 get notified!
               </p>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]">
+            </Link>
+            <Link
+              to="/nft"
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]"
+            >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 Set NFT Transfer Alerts
               </div>
@@ -47,8 +57,11 @@ export default function LandingPage() {
                 Track your favourite NFTs and get notified every time it is
                 transferred!
               </p>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]">
+            </Link>
+            <Link
+              to="/address"
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]"
+            >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 Watch a Particular Wallet
               </div>
@@ -57,6 +70,11 @@ export default function LandingPage() {
                 Stay on top of your crypto portfolio - set alerts for specific
                 wallet addresses and get notified of any activity!
               </p>
+            </Link>{" "}
+            <div className="bg-gray-400 rounded-lg shadow-lg py-4 px-6 w-[25%] flex flex-row items-center justify-center">
+              <div className="text-lg font-bold text-gray-800 mb-[6px]">
+                More Prompts coming soon!
+              </div>
             </div>
           </div>
         </div>

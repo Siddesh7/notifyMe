@@ -40,7 +40,7 @@ function addAddressToBeTracked(address, chain) {
   } else if (chain == "Polygon") {
     webhook_id = "wh_6ohp66co2hm38zxg";
   } else {
-    webhook_id = "wh_8lp8e0kper1or9sc";
+    webhook_id = "wh_9gtk7mt8rx5ziih9";
   }
 
   console.log(address, webhook_id);
