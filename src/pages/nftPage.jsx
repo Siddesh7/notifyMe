@@ -1,4 +1,3 @@
-import Table from "../components/Table";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NftTracker from "../components/nftForm";
@@ -8,7 +7,9 @@ export default function NFTPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("http://localhost:3000/api/nft");
+      const response = await axios.get(
+        "https://push-notify-me.onrender.com/api/nft"
+      );
       setData(response.data);
       console.log(response.data);
     }

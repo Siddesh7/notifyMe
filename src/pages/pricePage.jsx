@@ -7,7 +7,9 @@ export default function PricePage() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get("http://localhost:3000/api/price");
+      const response = await axios.get(
+        "https://push-notify-me.onrender.com/api/price"
+      );
       setData(response.data);
       console.log(response.data);
     }

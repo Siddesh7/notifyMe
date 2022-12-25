@@ -12,12 +12,7 @@ export default function LandingPage() {
           <p className="text-gray-400 my-8 ">
             The ultimate utility tool for setting alerts on important events.
           </p>
-          <a
-            href="/app"
-            className="bg-gray-200 hover:bg-gray-300 text-black font-medium py-2 px-7 my-[12px] rounded-md"
-          >
-            Less go
-          </a>
+
           <div className="flex flex-col md:flex-row space-y-8 space-x-0 md:space-y-0 md:space-x-4 mt-[20px]">
             <Link
               to="/gas"

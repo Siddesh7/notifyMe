@@ -4,7 +4,7 @@ function ActivityTracker() {
   const { address } = useAccount();
   const [formData, setFormData] = useState({
     requester: address,
-    address: "",
+    addressTracked: "",
     chain: "",
   });
   const [selectedOption, setSelectedOption] = useState("Polygon");
@@ -13,7 +13,7 @@ function ActivityTracker() {
     setSelectedOption(event.target.value);
     setFormData({ ...formData, chain: event.target.value });
   };
-  const url = "http://localhost:3000/api/address";
+  const url = "https://push-notify-me.onrender.com/api/address";
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
@@ -46,9 +46,9 @@ function ActivityTracker() {
             className="form-input py-2 px-3 block w-full leading-tight rounded-md focus:outline-none focus:shadow-outline-blue-500"
             id="minPrice"
             type="text"
-            value={formData.address}
+            value={formData.addressTracked}
             onChange={(e) => {
-              setFormData({ ...formData, address: e.target.value });
+              setFormData({ ...formData, addressTracked: e.target.value });
             }}
           />
         </div>
