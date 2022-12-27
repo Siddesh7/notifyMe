@@ -16,11 +16,11 @@ function Tracked({ data, type, heading }) {
             className="odd:bg-gray-200 even:bg-white text-center"
             key={item._id}
           >
-            {item.requester === address ? (
+            {item.requester.toLowerCase() === address.toLowerCase() ? (
               type == "nft" ? (
                 <td className="py-2 px-4 break-all">{`${item.contract_address}:${item.token_id}`}</td>
               ) : (
-                <td className="py-2 px-4">{`${item.address}`}</td>
+                <td className="py-2 px-4">{`${item.addressTracked}`}</td>
               )
             ) : null}
           </tr>
