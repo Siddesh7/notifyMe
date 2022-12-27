@@ -16,7 +16,7 @@ export default function LandingPage() {
           <div className="flex flex-col md:flex-row space-y-8 space-x-0 md:space-y-0 md:space-x-4 mt-[20px]">
             <Link
               to="/gas"
-              className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]"
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-full md:w-[25%]"
             >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 Set Gas Price Alerts
@@ -30,7 +30,7 @@ export default function LandingPage() {
             </Link>
             <Link
               to="/price"
-              className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]"
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-full md:w-[25%]"
             >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 Set ETH Price Alerts
@@ -42,7 +42,7 @@ export default function LandingPage() {
             </Link>
             <Link
               to="/nft"
-              className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]"
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-full md:w-[25%]"
             >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 Set NFT Transfer Alerts
@@ -55,7 +55,7 @@ export default function LandingPage() {
             </Link>
             <Link
               to="/address"
-              className="bg-white rounded-lg shadow-lg py-4 px-6 w-[25%]"
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-full md:w-[25%]"
             >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 Watch a Particular Wallet
@@ -66,7 +66,10 @@ export default function LandingPage() {
                 wallet addresses and get notified of any activity!
               </p>
             </Link>{" "}
-            <div className="bg-gray-400 rounded-lg shadow-lg py-4 px-6 w-[25%] flex flex-row items-center justify-center">
+            <div
+              className="bg-white rounded-lg shadow-lg py-4 px-6 w-full md:w-[25%]
+ flex flex-row items-center justify-center"
+            >
               <div className="text-lg font-bold text-gray-800 mb-[6px]">
                 More Prompts coming soon!
               </div>
